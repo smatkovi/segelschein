@@ -22,6 +22,11 @@ def zahl(q, antwort, einheit, warum, toleranz=0.1, bild=""):
 
 
 def lektion(ident, titel, begriffe, text, bild, aufgaben):
+    # Die Herleitung haengt hinten an. Sie steht nicht im Lektionstext,
+    # damit alle Formeln des Kurses an einer Stelle zu ueberblicken sind.
+    h = HERLEITUNGEN.get(ident)
+    if h:
+        text = text + "\n\n" + h
     return {"id": ident, "titel": titel, "begriffe": begriffe, "text": text,
             "bild": bild, "aufgaben": aufgaben}
 
@@ -29,6 +34,108 @@ def lektion(ident, titel, begriffe, text, bild, aufgaben):
 def kapitel(ident, titel, stufe, blurb, lektionen):
     return {"id": ident, "titel": titel, "stufe": stufe, "text": blurb,
             "lektionen": lektionen}
+
+
+# ===========================================================================
+# Herleitungen
+# ===========================================================================
+#
+# Jede Zahl, die der Kurs als Formel oder Faustregel benutzt, steht hier
+# mit ihrer Begruendung. lektion() haengt sie selbst an -- so kann keine
+# vergessen werden.
+#
+# Der Grund: Eine Faustregel, die man nur auswendig kann, hilft genau so
+# lange, wie die Lage zum Lehrbuch passt. Wer weiss, WORAUS die drei- bis
+# fuenffache Kettenlaenge kommt, weiss auch, wann sie nicht reicht.
+
+HERLEITUNGEN = {
+
+"b-teile":
+    "**Warum die Kette das Drei- bis Fuenffache der Wassertiefe misst.**\n\n"
+    "Ein Anker haelt nicht durch sein Gewicht, sondern weil sich seine "
+    "Flunke in den Grund gräbt. Eingraben tut sie sich nur, wenn der Zug "
+    "am Schaft **waagrecht** ankommt. Zieht die Kette schräg nach oben, "
+    "kippt der Anker aus und rutscht.\n\n"
+    "Damit ist es reine Geometrie. Die gesteckte Länge L ist die "
+    "Hypotenuse, die Wassertiefe T (plus Freibord) die Gegenkathete:\n\n"
+    "    sin(Zugwinkel) = T / L      →      L = T / sin(Zugwinkel)\n\n"
+    "Setzt man einen gerade noch tragbaren Zugwinkel von etwa 20° an:\n\n"
+    "    L = T / sin 20° = T / 0,34 ≈ 3 × T\n\n"
+    "und für die sichere Seite, rund 12°:\n\n"
+    "    L = T / sin 12° = T / 0,21 ≈ 5 × T\n\n"
+    "Daher die Spanne. Dazu kommt, dass eine schwere Kette in der Mitte "
+    "durchhängt und dieser Bauch den Winkel am Anker weiter verkleinert — "
+    "deshalb hält Kette besser als Leine, und deshalb steckt man bei "
+    "Leine eher das Siebenfache.\n\n"
+    "**Und warum mehr bei Wind.** Der Zug wächst mit dem Quadrat der "
+    "Windgeschwindigkeit (siehe das Kapitel Wetter). Doppelter Wind heisst "
+    "vierfacher Zug, der die Kette strafft, den Bauch herauszieht und den "
+    "Winkel vergrössert. Genau dann braucht man die Länge.",
+
+"k-kurse":
+    "**Woher der Faktor 1,4 beim Kreuzen kommt.**\n\n"
+    "Gegen den Wind geht nicht geradeaus. Ein Boot am Wind fährt etwa 45° "
+    "zur Windrichtung, also fährt es bei jedem Schlag schräg zu der Linie, "
+    "die es eigentlich zurücklegen will.\n\n"
+    "Von jedem gefahrenen Meter kommt nur der Anteil in Windrichtung "
+    "an — und der ist\n\n"
+    "    Fortschritt = gefahrener Weg × cos(45°) = Weg × 0,707\n\n"
+    "Umgekehrt gelesen: Für einen Meter Fortschritt muss man\n\n"
+    "    1 / cos(45°) = 1 / 0,707 = 1,41 Meter\n\n"
+    "segeln. Aus 6 km Luftlinie werden also gut 8,5 km — **unabhängig "
+    "davon, wie oft man wendet.** Zwei lange Schläge sind genauso weit wie "
+    "zwanzig kurze; die Wenden kosten nur zusätzlich Fahrt.\n\n"
+    "**Wer höher kann, gewinnt doppelt.** Bei 40° Kurs zum Wind ist der "
+    "Faktor 1/cos 40° = 1,31, bei 50° schon 1,56. Fünf Grad höher am Wind "
+    "sparen also mehr Weg, als fünf Grad schneller einbringen.",
+
+"w-wind":
+    "**Warum doppelter Wind vierfache Kraft bedeutet.**\n\n"
+    "Der Wind drückt gegen das Segel, weil er abgebremst wird. Was er dabei "
+    "abgibt, ist seine Bewegungsenergie, und die steckt in ½ m v². Pro "
+    "Sekunde trifft eine Luftmasse von ρ·A·v auf die Fläche A. Beides "
+    "zusammen ergibt den **Staudruck**:\n\n"
+    "    q = ½ · ρ · v²\n\n"
+    "Die Kraft auf das Segel ist dieser Druck mal Fläche mal einem "
+    "Beiwert:\n\n"
+    "    F = q · A · c = ½ · ρ · v² · A · c\n\n"
+    "Alles darin ist fest ausser v. Also gilt schlicht\n\n"
+    "    F ∝ v²\n\n"
+    "Verdoppelt sich der Wind von 10 auf 20 Knoten, vervierfacht sich die "
+    "Kraft. Verdreifacht er sich, ist es das Neunfache.\n\n"
+    "**Deshalb ist die Beaufort-Skala nicht linear.** Sie zählt nicht "
+    "Geschwindigkeit, sondern Wirkung. Der Sprung von 4 auf 5 Beaufort "
+    "sind rund 5 auf 8 m/s — also Faktor 1,6 in der Geschwindigkeit, aber "
+    "**2,6 in der Kraft**. Für eine Jolle ist das der Unterschied zwischen "
+    "einem schönen Tag und einem, der reffen verlangt.\n\n"
+    "**Die Umrechnungen**, die dabei gebraucht werden:\n\n"
+    "    m/s × 3,6 = km/h        (3600 s je Stunde ÷ 1000 m je Kilometer)\n"
+    "    1 Knoten  = 1 Seemeile je Stunde = 1,852 km/h ≈ 0,514 m/s\n\n"
+    "Die Seemeile ist eine Bogenminute auf einem Grosskreis der Erde: "
+    "40 007 km ÷ 360 ÷ 60 = 1,852 km. Im Kopf: **Knoten halbieren gibt "
+    "ungefähr m/s.**",
+
+"w-gewitter":
+    "**Warum Sekunden durch drei die Entfernung in Kilometern ergibt.**\n\n"
+    "Das Licht des Blitzes ist praktisch sofort da — 300 000 km in der "
+    "Sekunde. Der Donner ist Schall und braucht seine Zeit:\n\n"
+    "    Schallgeschwindigkeit ≈ 343 m/s bei 20 °C\n\n"
+    "Für einen Kilometer braucht er also\n\n"
+    "    1000 m ÷ 343 m/s ≈ 2,9 s\n\n"
+    "aufgerundet **drei Sekunden je Kilometer**. Gezählte Sekunden durch "
+    "drei sind damit die Entfernung in Kilometern; neun Sekunden sind drei "
+    "Kilometer.\n\n"
+    "**Was die Zahl wert ist.** Sie sagt, wo der Blitz war, nicht wo der "
+    "nächste sein wird. Eine Gewitterzelle zieht mit 30 bis 60 km/h; in "
+    "den drei Minuten, die man zum Nachdenken braucht, kommt sie zwei "
+    "Kilometer näher. Und der Winddruck der Bö wächst mit dem Quadrat der "
+    "Geschwindigkeit: Aus 4 Beaufort werden binnen Minuten 8, das ist "
+    "**viermal** so viel Kraft im Segel.\n\n"
+    "Deshalb ist die praktische Regel nicht „ab drei Kilometern wird es "
+    "eng“, sondern: Wer das Gewitter zählen kann, hätte schon am Ufer "
+    "sein sollen.",
+
+}
 
 
 # ===========================================================================

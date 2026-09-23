@@ -17,6 +17,12 @@ sys.path.insert(0, ROOT)
 
 import fragen
 import kurs
+from zweisprachig import durchgehen, einheit_paaren
+
+try:
+    from uebersetzung import EN
+except ImportError:      # noch keine Uebersetzung vorhanden
+    EN = {}
 
 
 def mischen(optionen, antwort, saat):
@@ -124,16 +130,53 @@ def main():
             "warum": entry["warum"],
         })
 
+    # Aus einsprachig zweisprachig machen. Fehlt eine Uebersetzung, sagt
+    # der Bau welche -- und liefert nicht stillschweigend Deutsch aus.
+    fehlt = []
+    chapters = durchgehen(chapters, EN, fehlt)
+    items = durchgehen(items, EN, fehlt)
+    themen = durchgehen(kurs.THEMEN, EN, fehlt)
+    einheit_paaren(chapters, EN, fehlt)
+    einheit_paaren(items, EN, fehlt)
+
+    vollstaendig = not fehlt
+    if fehlt:
+        einzig = sorted(set(fehlt), key=len)
+        pfad = os.path.join(ROOT, "data", "fehlt.json")
+        with open(pfad, "w", encoding="utf-8") as fh:
+            json.dump(einzig, fh, ensure_ascii=False, indent=1)
+        print("%d Uebersetzungen fehlen (%d verschiedene), Liste in "
+              "data/fehlt.json" % (len(fehlt), len(einzig)), file=sys.stderr)
+        for t in einzig[:5]:
+            print("   " + t[:90], file=sys.stderr)
+        if os.environ.get("UNVOLLSTAENDIG") != "1":
+            return 1
+        print("UNVOLLSTAENDIG=1: wird trotzdem geschrieben", file=sys.stderr)
+    else:
+        print("Zweisprachigkeit: vollstaendig (%d Texte)" % len(EN))
+        pfad = os.path.join(ROOT, "data", "fehlt.json")
+        if os.path.exists(pfad):
+            os.remove(pfad)
+
     out = {
-        "titel": "Segelschein",
-        "untertitel": ("Theorie für den Segelschein A (Binnen). Eigene "
-                       "Fragen zum Lehrplan, mit Karteikarten und "
-                       "Wiederholung nach Abstand."),
+        "titel": {"de": "Segelschein",
+                  "en": "Sailing licence"},
+        "untertitel": {
+            "de": ("Theorie für den Segelschein A (Binnen). Eigene "
+                   "Fragen zum Lehrplan, mit Karteikarten und "
+                   "Wiederholung nach Abstand."),
+            "en": ("Theory for the German inland sailing licence "
+                   "(Segelschein A). Our own questions to the syllabus, "
+                   "with flashcards and spaced repetition."),
+        },
         "ausfuehrbar": False,
-        "sprachen": ["de"],
+        # Englisch erst anbieten, wenn es auch vollstaendig ist. Ein
+        # Sprachschalter, der auf halbem Weg ins Deutsche zurueckfaellt,
+        # ist schlimmer als gar keiner.
+        "sprachen": ["de", "en"] if vollstaendig else ["de"],
         "kapitel": chapters,
         "plan": plan,
-        "einstufung": {"themen": kurs.THEMEN, "fragen": items},
+        "einstufung": {"themen": themen, "fragen": items},
     }
     path = os.path.join(ROOT, "data", "kurs.json")
     with open(path, "w", encoding="utf-8") as fh:
