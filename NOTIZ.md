@@ -1,21 +1,24 @@
-Segelschein 2.2 — Theorie für den Segelschein A (Binnen)
+Segelschein 2.3 — jede Formel wird hergeleitet
 
-Sieben Kapitel, elf Lektionen, 291 Aufgaben: vom Boot über die Kurse zum
-Wind, Wende und Halse, die Ausweichregeln, Betonnung und Lichter bis zu
-Wetter, Sicherheit und Umweltrecht. Mit gezeichneten Schemata,
-Karteikartenmodus und Wiederholung nach wachsenden Abständen.
+**Neu:** Vier Herleitungen, jeweils am Ende der Lektion:
 
-Die Fragen sind eigene zum Lehrplan, nicht der amtliche Katalog.
+* Warum die Ankerkette das Drei- bis Fünffache der Wassertiefe misst —
+  aus dem Zugwinkel am Ankerschaft, L = T / sin α.
+* Warum Kreuzen den Weg um 1,41 verlängert — 1/cos 45°, und warum die
+  Zahl der Wenden daran nichts ändert.
+* Warum doppelter Wind vierfache Kraft bedeutet — Staudruck ½ρv², und
+  warum die Beaufort-Skala deshalb nicht linear sein kann.
+* Warum Sekunden durch drei die Entfernung eines Gewitters in Kilometern
+  ergibt — aus der Schallgeschwindigkeit.
 
-**Neu in 2.2:** Nach einer falschen Antwort kommt zuerst die Erklärung und
-ein zweiter Versuch; die Lösung gibt es auf Knopfdruck und nach dem zweiten
-Fehlversuch von selbst. Bei Auswahlaufgaben wird nur noch die eigene falsche
-Wahl markiert — die richtige bleibt bis dahin verdeckt, damit der zweite
-Versuch einer bleibt.
+Dazu die Umrechnungen Knoten ↔ km/h ↔ m/s mit ihrer Herkunft aus der
+Seemeile.
 
 **Pakete**
 
-* `segelschein_2.2_armel.deb` — Nokia N9 / N950 (MeeGo 1.2 Harmattan),
-  `dpkg -i segelschein_2.2_armel.deb`
-* `harbour-segelschein-1.0.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish OS,
-  `pkcon install-local <datei>.rpm`
+* `segelschein_2.3_armel.deb` — Nokia N9 / N950, `dpkg -i`
+* `harbour-segelschein-1.1.0-1.aarch64.rpm` und `…armv7hl.rpm` —
+  Sailfish OS, `pkcon install-local <datei>.rpm`
+
+Die englische Fassung ist vorbereitet, aber noch nicht übersetzt; der
+Kurs bleibt deshalb einsprachig deutsch.
