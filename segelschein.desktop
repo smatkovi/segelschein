@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Segelschein
+Comment=Theorie für den Segelschein A
+Icon=/usr/share/icons/hicolor/80x80/apps/segelschein.png
+Exec=/opt/segelschein/bin/segelschein
+Terminal=false
+Categories=Education;
+X-Osso-Type=application/x-executable

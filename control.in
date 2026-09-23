@@ -1,0 +1,14 @@
+Package: segelschein
+Version: @VERSION@
+Section: user/education
+Priority: optional
+Architecture: armel
+Depends: libqt4-declarative, libqt4-script, libqt4-gui, qt-components
+Maintainer: Sebastian Matkovich <sebastian.matkovich@gmail.com>
+Description: Theorie fuer den Segelschein A (Binnen)
+ Sieben Kapitel vom Boot bis zum Umweltrecht, mit gezeichneten Schemata
+ und einem Karteikartenmodus, der nach wachsenden Abstaenden wiederholt.
+ Die Fragen sind eigene zum Lehrplan, nicht der amtliche Katalog.
+Maemo-Display-Name: Segelschein
+XB-Maemo-Icon-26:
+@ICON@
