@@ -1,24 +1,29 @@
-Segelschein 2.3 — jede Formel wird hergeleitet
+Segelschein 2.4 — jedes Formelzeichen definiert, jede Formel hergeleitet
 
-**Neu:** Vier Herleitungen, jeweils am Ende der Lektion:
+**Neu in jeder Herleitung:** ein Abschnitt **Formelzeichen** mit
+Bedeutung und Einheit, und die Formeln zweiter Stufe ausgerechnet:
 
-* Warum die Ankerkette das Drei- bis Fünffache der Wassertiefe misst —
-  aus dem Zugwinkel am Ankerschaft, L = T / sin α.
-* Warum Kreuzen den Weg um 1,41 verlängert — 1/cos 45°, und warum die
-  Zahl der Wenden daran nichts ändert.
-* Warum doppelter Wind vierfache Kraft bedeutet — Staudruck ½ρv², und
-  warum die Beaufort-Skala deshalb nicht linear sein kann.
-* Warum Sekunden durch drei die Entfernung eines Gewitters in Kilometern
-  ergibt — aus der Schallgeschwindigkeit.
+* Der **Staudruck** q = ½ρv² aus dem Massenstrom ρ·A·v und der
+  Bewegungsenergie — vorher stand er einfach da. Daraus F = q·A·c und
+  damit F ∝ v².
+* Die **Seemeile** als Bogenminute: 40 007 km ÷ 360 ÷ 60 = 1,852 km, und
+  daraus 1 kn = 0,514 m/s. Ebenso, warum m/s × 3,6 = km/h.
+* Beim Anker die Rechnung mit Zahlen: L = T/sin 20° ≈ 2,9·T und
+  L = T/sin 12° ≈ 4,8·T — die Spanne „drei bis fünf" ist keine
+  Konvention, sondern zwei Winkel in einer Sinusfunktion. Dazu, warum
+  eine durchhängende Kette den Winkel weiter verkleinert.
+* Beim Kreuzen d = s·cos β, und daraus, dass der Faktor nur am Kurs zum
+  Wind hängt und nicht an der Zahl der Wenden.
+* Beim Gewitter die Temperaturabhängigkeit der Schallgeschwindigkeit
+  (331 + 0,6·T), und warum sie für die Faustregel belanglos ist.
 
-Dazu die Umrechnungen Knoten ↔ km/h ↔ m/s mit ihrer Herkunft aus der
-Seemeile.
+**Und ein Fehler aus 2.3 behoben:** Der Textdarsteller kannte keine
+Überschriften.
 
 **Pakete**
 
-* `segelschein_2.3_armel.deb` — Nokia N9 / N950, `dpkg -i`
-* `harbour-segelschein-1.1.0-1.aarch64.rpm` und `…armv7hl.rpm` —
-  Sailfish OS, `pkcon install-local <datei>.rpm`
+* `segelschein_2.4_armel.deb` — Nokia N9 / N950, `dpkg -i`
+* `harbour-segelschein-1.2.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish
 
-Die englische Fassung ist vorbereitet, aber noch nicht übersetzt; der
-Kurs bleibt deshalb einsprachig deutsch.
+Die englische Fassung des Kurses ist weiterhin vorbereitet, aber nicht
+übersetzt; der Kurs bleibt einsprachig deutsch.
