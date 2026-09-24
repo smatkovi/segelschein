@@ -51,12 +51,68 @@ def leinwand(farbe=HIMMEL):
 
 def sichern(bild, name):
     os.makedirs(OUT, exist_ok=True)
+    # Deutsch behaelt den blossen Namen, jede weitere Sprache haengt ihr
+    # Kuerzel an - so findet die App sie ohne Tabelle.
+    if SPRACHE != "de":
+        name = name + "." + SPRACHE
     klein = bild.resize((W, H), Image.LANCZOS)
     klein.save(os.path.join(OUT, name + ".png"))
     print("  %s" % name)
 
 
+# Die Beschriftung steckt im Bild, also braucht die englische Fassung ein
+# eigenes Bild.  Uebersetzt wird genau hier, beim Zeichnen - der Rest des
+# Skripts merkt davon nichts.
+EN = {
+    "Sperrzone": "No-go zone",
+    "Wind": "Wind",
+    "Luv": "Windward",
+    "(Windseite)": "(wind side)",
+    "Lee": "Leeward",
+    "(windabgewandt)": "(away from wind)",
+    "Backbordbug": "Port tack",
+    "Steuerbordbug": "Starboard tack",
+    "weicht aus →": "gives way →",
+    "Luv: weicht aus": "Windward: gives way",
+    "Lee: Vorrang": "Leeward: right of way",
+    "Segel: Vorrang": "Sail: right of way",
+    "Motor: weicht aus": "Power: gives way",
+    "Wende": "Tack",
+    "Bug durch den Wind,": "bow through the wind,",
+    "langsam, ungefährlich": "slow, harmless",
+    "Halse": "Gybe",
+    "Heck durch den Wind,": "stern through the wind,",
+    "Baum schlägt herüber:": "boom slams across:",
+    "Köpfe einziehen": "keep your head down",
+    "Fahrwasser, von See kommend": "Channel, coming from seaward",
+    "Backbord": "Port",
+    "rot, stumpf": "red, blunt",
+    "Steuerbord": "Starboard",
+    "grün, spitz": "green, pointed",
+    "Lichterführung von vorn": "Lights seen from ahead",
+    "weißes Topplicht dazu": "plus white masthead light",
+    "rot = Backbord": "red = port",
+    "grün = Steuerbord": "green = starboard",
+    "Am Wind": "Close-hauled",
+    "Halber Wind": "Beam reach",
+    "Raumschots": "Broad reach",
+    "Vor dem Wind": "Running",
+    "Mast": "Mast",
+    "Großsegel": "Mainsail",
+    "Fock": "Jib",
+    "Baum": "Boom",
+    "Bug": "Bow",
+    "Heck": "Stern",
+    "Schwert": "Centreboard",
+    "Ruder": "Rudder",
+}
+
+SPRACHE = "de"
+
+
 def text(draw, x, y, inhalt, groesse=13, farbe=TEXT, mitte=False):
+    if SPRACHE != "de":
+        inhalt = EN.get(inhalt, inhalt)
     f = schrift(groesse * S)
     if mitte:
         kasten = draw.textbbox((0, 0), inhalt, font=f)
@@ -326,13 +382,15 @@ def lichter():
 
 
 def main():
-    print("Bilder:")
-    kurse_zum_wind()
-    bootsteile()
-    ausweichen()
-    wende_halse()
-    betonnung()
-    lichter()
+    global SPRACHE
+    for SPRACHE in ("de", "en"):
+        print("Bilder (%s):" % SPRACHE)
+        kurse_zum_wind()
+        bootsteile()
+        ausweichen()
+        wende_halse()
+        betonnung()
+        lichter()
 
 
 if __name__ == "__main__":
