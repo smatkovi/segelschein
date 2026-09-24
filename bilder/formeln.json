@@ -1,0 +1,27 @@
+{
+ "formel-1f62854f": {
+  "breite": 158,
+  "hoehe": 42,
+  "tex": "$F = \\frac{1}{2}\\rho v^{2} A\\,c$"
+ },
+ "formel-650c30b7": {
+  "breite": 101,
+  "hoehe": 43,
+  "tex": "$L = \\frac{T}{\\sin\\alpha}$"
+ },
+ "formel-798d4fb7": {
+  "breite": 199,
+  "hoehe": 35,
+  "tex": "$d\\,[\\mathrm{km}] \\approx t\\,[\\mathrm{s}]\\,/\\,3$"
+ },
+ "formel-97690cdc": {
+  "breite": 96,
+  "hoehe": 48,
+  "tex": "$s = \\frac{d}{\\cos\\beta}$"
+ },
+ "formel-9e585780": {
+  "breite": 383,
+  "hoehe": 35,
+  "tex": "$1\\,\\mathrm{kn} = 1{,}852\\,\\mathrm{km/h} \\approx 0{,}51\\,\\mathrm{m/s}$"
+ }
+}

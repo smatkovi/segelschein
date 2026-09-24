@@ -11,6 +11,7 @@ Deutsch, weil die Prüfung deutsch ist. Das Format trägt Sprachpaare
 from __future__ import unicode_literals
 
 from herleitungen import HERLEITUNGEN
+from kursformeln import KURSFORMELN
 
 
 def mc(q, optionen, antwort, warum, bild=""):
@@ -23,14 +24,16 @@ def zahl(q, antwort, einheit, warum, toleranz=0.1, bild=""):
             "warum": warum, "toleranz": toleranz, "bild": bild}
 
 
-def lektion(ident, titel, begriffe, text, bild, aufgaben):
+def lektion(ident, titel, begriffe, text, bild, aufgaben,
+            formeln=None):
     # Die Herleitung haengt hinten an. Sie steht nicht im Lektionstext,
     # damit alle Formeln des Kurses an einer Stelle zu ueberblicken sind.
     h = HERLEITUNGEN.get(ident)
     if h:
         text = text + "\n\n" + h
     return {"id": ident, "titel": titel, "begriffe": begriffe, "text": text,
-            "bild": bild, "aufgaben": aufgaben}
+            "bild": bild, "aufgaben": aufgaben,
+            "formeln": formeln or KURSFORMELN.get(ident, [])}
 
 
 def kapitel(ident, titel, stufe, blurb, lektionen):

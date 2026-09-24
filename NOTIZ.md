@@ -16,7 +16,22 @@ Englisch liest, soll die Prüfungsbegriffe trotzdem mitnehmen.
 Der Erzeuger bricht ab, wenn eine Übersetzung fehlt, und bietet Englisch
 erst an, wenn es vollständig ist. `data/fehlt.json` ist verschwunden.
 
+**Neu: die Formeln stehen zweimal da** — oben die Zeile, wie sie im
+Lehrtext vorkommt, darunter dieselbe Sache gesetzt, und dazu, woher sie
+kommt und wo sie aufhört zu gelten:
+
+    L = T / sin α           wie viel Kette der Anker braucht
+    s = d / cos β           der Umweg beim Kreuzen
+
+Fünf Formeln in vier Lektionen: Ankerkette, Kreuzen, Winddruck,
+Seemeile und Knoten, Entfernung des Gewitters.
+
+Gesetzt wird beim Bauen mit `tools/formeln.py` (matplotlib.mathtext in
+Computer Modern, also ohne TeX-Installation); das Gerät zeigt nur ein PNG,
+auf Sailfish vom Thema eingefärbt. Die Formeln stehen in
+`kursformeln.py`, nach Lektion geordnet.
+
 **Pakete**
 
-* `segelschein_2.5_armel.deb` — Nokia N9 / N950, `dpkg -i`
-* `harbour-segelschein-1.3.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish
+* `segelschein_2.8_armel.deb` — Nokia N9 / N950, `dpkg -i`
+* `harbour-segelschein-1.5.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish

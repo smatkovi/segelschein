@@ -16,6 +16,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
 import fragen
+import formeln as formelsatz
 import kurs
 from zweisprachig import durchgehen, einheit_paaren
 
@@ -99,6 +100,7 @@ def main():
                 "begriffe": lesson["begriffe"],
                 "text": lesson["text"],
                 "bild": lesson.get("bild", ""),
+                "formeln": [dict(f) for f in lesson.get("formeln", [])],
                 # No runnable example here -- the app hides the whole block
                 # when it is empty, which is what a theory course wants.
                 "beispiel": "",
@@ -138,6 +140,28 @@ def main():
     themen = durchgehen(kurs.THEMEN, EN, fehlt)
     einheit_paaren(chapters, EN, fehlt)
     einheit_paaren(items, EN, fehlt)
+
+    # Zu jeder Formel das Bild dazulegen, das tools/formeln.py gesetzt hat.
+    # Fehlt eines, bleibt die Textzeile stehen und nur das Gesetzte fehlt --
+    # matplotlib gibt es nur auf dem Baurechner.
+    bilder = formelsatz.gesetzte()
+    ohne_bild = []
+    for kap in chapters:
+        for lek in kap["lektionen"]:
+            for eintrag in lek.get("formeln", []):
+                name = formelsatz.kennung(eintrag["tex"])
+                daten = bilder.get(name)
+                if not daten:
+                    ohne_bild.append(eintrag["tex"])
+                    continue
+                eintrag["bild"] = name
+                eintrag["breite"] = daten["breite"]
+                eintrag["hoehe"] = daten["hoehe"]
+    if ohne_bild:
+        print("%d Formeln ohne Bild -- tools/formeln.py auf dem Baurechner "
+              "laufen lassen:" % len(ohne_bild), file=sys.stderr)
+        for tex in ohne_bild:
+            print("   " + tex, file=sys.stderr)
 
     vollstaendig = not fehlt
     if fehlt:
