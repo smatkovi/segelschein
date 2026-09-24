@@ -11,9 +11,35 @@ Gesetzt werden die Formeln beim Bauen, siehe tools/formeln.py.
 from __future__ import unicode_literals
 
 
-def formel(zeile, tex, untertitel, erklaerung):
+# Was die Zeichen bedeuten, je Formel -- gefunden ueber den Untertitel.
+# Jedes Formelzeichen wird definiert, mit Bedeutung und Einheit, bevor es
+# auftaucht: Der Kasten steht fuer sich, und wer ihn beim Durchblaettern
+# zuerst sieht, hat den Text darueber noch nicht gelesen.
+ZEICHEN = {
+ "Wie viel Kette der Anker braucht":
+   "`L` gesteckte Länge von Kette und Leine, m. `T` Wassertiefe plus "
+   "Freibord, also von der Klampe bis zum Grund, m. `α` Zugwinkel am "
+   "Ankerschaft gegen den Grund, Grad.",
+ "Der Umweg beim Kreuzen":
+   "`s` tatsächlich gesegelter Weg, km. `d` Weg in Windrichtung, den man "
+   "gutmacht (Luftlinie), km. `β` Kurs zum Wind, Grad.",
+ "Winddruck wächst mit dem Quadrat":
+   "`F` Kraft auf die Fläche, N. `q` Staudruck, Pa. `ρ` Luftdichte, "
+   "1,225 kg/m³. `v` Windgeschwindigkeit, m/s. `A` angeströmte Fläche, m². "
+   "`c` Formzahl, dimensionslos.",
+ "Warum eine Seemeile ausgerechnet 1852 m hat":
+   "`sm` Seemeile, eine Bogenminute des Erdumfangs. `kn` Knoten, also eine "
+   "Seemeile je Stunde.",
+ "Wie weit das Gewitter weg ist":
+   "`d` Entfernung des Blitzes, km. `t` Zeit zwischen Blitz und Donner, s. "
+   "Die Schallgeschwindigkeit ist 343 m/s.",
+}
+
+
+def formel(zeile, tex, untertitel, erklaerung, zeichen=""):
     return {"code": zeile, "tex": tex, "untertitel": untertitel,
-            "erklaerung": erklaerung}
+            "erklaerung": erklaerung,
+            "zeichen": zeichen or ZEICHEN.get(untertitel, "")}
 
 
 KURSFORMELN = {

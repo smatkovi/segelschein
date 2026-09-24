@@ -1884,4 +1884,19 @@ EN.update({
 'Das Licht ist praktisch sofort da, der Schall braucht 343 m/s -- für einen Kilometer also rund 2,9 Sekunden. Zählt man die Sekunden zwischen Blitz und Donner und teilt durch drei, steht die Entfernung in Kilometern da. **Wo es eng wird:** unter 15 Sekunden ist die Zelle keine fünf Kilometer entfernt, und ein Blitz kann aus dem Amboss auch weit vor der Regenwand einschlagen. Dann gehört das Boot an Land, nicht auf den See.':
 'The light is there practically at once, the sound needs 343 m/s -- about 2.9 seconds for a kilometre. Count the seconds between flash and thunder and divide by three and the distance stands there in kilometres. **Where it gets tight:** under 15 seconds the cell is less than five kilometres away, and lightning can strike from the anvil well ahead of the rain. Then the boat belongs ashore, not on the lake.',
 
+'`L` gesteckte Länge von Kette und Leine, m. `T` Wassertiefe plus Freibord, also von der Klampe bis zum Grund, m. `α` Zugwinkel am Ankerschaft gegen den Grund, Grad.':
+'`L` scope of chain and rode paid out, m. `T` depth of water plus freeboard, that is from the cleat to the bottom, m. `α` angle of pull at the anchor shank against the bottom, degrees.',
+
+'`s` tatsächlich gesegelter Weg, km. `d` Weg in Windrichtung, den man gutmacht (Luftlinie), km. `β` Kurs zum Wind, Grad.':
+'`s` distance actually sailed, km. `d` distance made good in the wind direction (straight line), km. `β` course to the wind, degrees.',
+
+'`F` Kraft auf die Fläche, N. `q` Staudruck, Pa. `ρ` Luftdichte, 1,225 kg/m³. `v` Windgeschwindigkeit, m/s. `A` angeströmte Fläche, m². `c` Formzahl, dimensionslos.':
+'`F` force on the area, N. `q` dynamic pressure, Pa. `ρ` air density, 1.225 kg/m³. `v` wind speed, m/s. `A` exposed area, m². `c` shape coefficient, dimensionless.',
+
+'`sm` Seemeile, eine Bogenminute des Erdumfangs. `kn` Knoten, also eine Seemeile je Stunde.':
+"`sm` nautical mile, one minute of arc of the earth's circumference. `kn` knot, that is one nautical mile per hour.",
+
+'`d` Entfernung des Blitzes, km. `t` Zeit zwischen Blitz und Donner, s. Die Schallgeschwindigkeit ist 343 m/s.':
+'`d` distance of the lightning, km. `t` time between flash and thunder, s. The speed of sound is 343 m/s.',
+
 })
