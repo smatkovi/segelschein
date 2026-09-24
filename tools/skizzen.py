@@ -59,6 +59,25 @@ EN = {
     "Schall: 343 m/s": "sound: 343 m/s",
     "Licht: sofort da": "light: there at once",
     "Sekunden zählen": "count the seconds",
+    "voraus": "ahead",
+    "querab": "abeam",
+    "achtern": "astern",
+    "Seitenlicht": "sidelight",
+    "Hecklicht": "sternlight",
+    "Topplicht": "masthead light",
+    "90° + 22,5° = 112,5°": "90° + 22.5° = 112.5°",
+    "zwei Striche = 2 × 360°/32": "two points = 2 × 360°/32",
+    "360° − 2 × 112,5° = 135°": "360° − 2 × 112.5° = 135°",
+    "füllt genau den Rest auf": "fills in exactly the rest",
+    "2 × 112,5° = 225°": "2 × 112.5° = 225°",
+    "112,5°": "112.5°",
+    "135°": "135°",
+    "die 135° achtern sind zugleich der Sektor, in dem man überholt: dort": "those 135° astern are also the overtaking sector: there",
+    "sieht man nur das weiße Hecklicht und kein farbiges Licht": "you see only the white sternlight and no coloured light",
+    "zwei Striche": "two points",
+    "rot": "red",
+    "grün": "green",
+    "weiß": "white",
 }
 
 
@@ -286,6 +305,65 @@ def donner():
     sichern(bild, "skizze-donner")
 
 
+def sektoren():
+    """Die Horizontboegen der Lichter, von oben gesehen."""
+    bild, draw = leinwand()
+    cx, cy, r = 138, 148, 104
+
+    # Die drei Sektoren als Kreisausschnitte. PIL zaehlt von rechts (3 Uhr)
+    # im Uhrzeigersinn; voraus ist bei uns oben, also -90 Grad.
+    def sektor(von, bis, farbe):
+        draw.pieslice([(cx - r) * S, (cy - r) * S, (cx + r) * S, (cy + r) * S],
+                      von - 90, bis - 90, fill=farbe)
+
+    sektor(-112.5, 0, (74, 28, 28))       # Backbord, rot
+    sektor(0, 112.5, (24, 64, 36))        # Steuerbord, gruen
+    sektor(112.5, 247.5, (60, 60, 68))    # Heck, weiss
+
+    # Grenzstrahlen und die Querab-Linie
+    for winkel in (-112.5, 0, 112.5, 180):
+        a = math.radians(winkel - 90)
+        strich(draw, cx, cy, cx + r * math.cos(a), cy + r * math.sin(a), DUENN, 1)
+    for seite in (-1, 1):
+        a = math.radians(seite * 90 - 90)
+        gestrichelt(draw, cx, cy, cx + (r + 14) * math.cos(a),
+                    cy + (r + 14) * math.sin(a))
+
+    # Das Boot in der Mitte, Bug nach oben
+    draw.polygon([(cx * S, (cy - 30) * S), ((cx + 12) * S, (cy + 4) * S),
+                  ((cx + 8) * S, (cy + 24) * S), ((cx - 8) * S, (cy + 24) * S),
+                  ((cx - 12) * S, (cy + 4) * S)], fill=KOERPER)
+
+    text(draw, cx, cy - r - 18, "voraus", 10, DUENN, mitte=True)
+    # Nur einmal beschriftet: die Querab-Linie ist symmetrisch, und zwei
+    # Beschriftungen stossen rechts an die Rechnung.
+    text(draw, 6, cy - 18, "querab", 9, DUENN)
+
+    text(draw, cx - 62, cy - 52, "112,5°", 12, ROT, mitte=True)
+    text(draw, cx - 62, cy - 36, "rot", 10, ROT, mitte=True)
+    text(draw, cx + 62, cy - 52, "112,5°", 12, GUT, mitte=True)
+    text(draw, cx + 62, cy - 36, "grün", 10, GUT, mitte=True)
+    text(draw, cx, cy + 54, "135°", 12, TEXT, mitte=True)
+    text(draw, cx, cy + 70, "weiß", 10, TEXT, mitte=True)
+
+    # Die Rechnung, rechts daneben
+    x = 268
+    text(draw, x, 42, "Seitenlicht", 11, BETONT)
+    text(draw, x, 60, "90° + 22,5° = 112,5°", 11, BETONT)
+    text(draw, x, 76, "zwei Striche = 2 × 360°/32", 9, DUENN)
+    text(draw, x, 108, "Hecklicht", 11, TEXT)
+    text(draw, x, 126, "360° − 2 × 112,5° = 135°", 11, TEXT)
+    text(draw, x, 142, "füllt genau den Rest auf", 9, DUENN)
+    text(draw, x, 174, "Topplicht", 11, WARN)
+    text(draw, x, 192, "2 × 112,5° = 225°", 11, WARN)
+
+    text(draw, 22, 272, "die 135° achtern sind zugleich der Sektor, in dem "
+                        "man überholt: dort", 10, DUENN)
+    text(draw, 22, 286, "sieht man nur das weiße Hecklicht und kein "
+                        "farbiges Licht", 10, DUENN)
+    sichern(bild, "skizze-sektoren")
+
+
 def main():
     global SPRACHE
     for SPRACHE in ("de", "en"):
@@ -294,6 +372,7 @@ def main():
         kreuzen()
         staudruck()
         donner()
+        sektoren()
     return 0
 
 

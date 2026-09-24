@@ -17,6 +17,7 @@ sys.path.insert(0, ROOT)
 
 import fragen
 import formeln as formelsatz
+import kartenherleitungen
 import kurs
 from zweisprachig import durchgehen, einheit_paaren
 
@@ -72,6 +73,17 @@ def aufgabe(task, saat):
     """Rename the authoring keys to the ones the engine reads."""
     out = {"kind": task["kind"], "q": task["q"], "warum": task["warum"],
            "bild": task.get("bild", "")}
+    # Die Herleitung haengt nicht an der Aufgabe, sondern liegt daneben
+    # (kartenherleitungen.py) und wird ueber den Fragetext zugeordnet. So
+    # aendert sich der Schluessel der Uebersetzung nicht, wenn eine
+    # Herleitung dazukommt -- der Fragetext bleibt, was er war.
+    herleitung = kartenherleitungen.HERLEITUNGEN.get(task["q"], "")
+    if herleitung:
+        out["herleitung"] = herleitung
+        # Die Skizze gehoert zur Herleitung und steht mit ihr in der
+        # Loesung. Nicht in "bild": das steht ueber der Frage und wuerde
+        # die Antwort verraten.
+        out["skizze"] = kartenherleitungen.SKIZZEN.get(task["q"], "")
     if task["kind"] == "mc":
         optionen, antwort = mischen(task["optionen"], task["antwort"], saat)
         out["options"] = optionen
@@ -84,7 +96,35 @@ def aufgabe(task, saat):
     return out
 
 
+def herleitungen_pruefen():
+    """Jeder Schluessel muss auf eine wirkliche Frage zeigen.
+
+    Ein Tippfehler im Fragetext waere sonst unsichtbar: die Herleitung
+    faende ihre Karte nicht, und die Karte bliebe ohne Herleitung -- genau
+    der Zustand, den es hier abzustellen gilt.
+    """
+    alle = set()
+    for kapitel in kurs.KAPITEL:
+        for lektion in kapitel["lektionen"]:
+            for t in lektion["aufgaben"]:
+                alle.add(t["q"])
+    for aufgaben in fragen.BANK.values():
+        for t in aufgaben:
+            alle.add(t["q"])
+    verwaist = sorted(set(kartenherleitungen.HERLEITUNGEN) - alle) \
+             + sorted(set(kartenherleitungen.SKIZZEN) - alle)
+    if verwaist:
+        print("%d Herleitungen zeigen ins Leere:" % len(verwaist),
+              file=sys.stderr)
+        for q in verwaist:
+            print("   " + q, file=sys.stderr)
+        return False
+    return True
+
+
 def main():
+    if not herleitungen_pruefen():
+        return 1
     chapters = []
     for chapter in kurs.KAPITEL:
         lessons = []

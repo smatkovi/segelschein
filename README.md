@@ -41,7 +41,7 @@ deterministisch und zählt danach nach, damit kein Muster entsteht.
 ```sh
 python3 tools/bilder.py          # Schemata zeichnen
 python3 tools/make-kurs.py       # data/kurs.json erzeugen
-tools/build-deb.sh 2.2           # braucht ~/ps/c-lehrer/build/c-lehrer
+tools/build-deb.sh 3.1           # braucht ~/ps/c-lehrer/build/c-lehrer
 ```
 
 Die Sailfish-RPMs entstehen im Baum von `harbour-lehrer`
@@ -50,7 +50,7 @@ Die Sailfish-RPMs entstehen im Baum von `harbour-lehrer`
 
 ## Installieren
 
-* **N9 / N950:** `dpkg -i segelschein_2.2_armel.deb`
+* **N9 / N950:** `dpkg -i segelschein_3.1_armel.deb`
 * **Sailfish OS:** `pkcon install-local harbour-segelschein-1.0.0-1.<arch>.rpm`
 
 Die Pakete für beide Systeme hängen an den

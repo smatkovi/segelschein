@@ -18,8 +18,8 @@ Zahlen und Einheiten bleiben, wie sie sind.
 from __future__ import unicode_literals
 
 # Felder, deren Inhalt gelesen wird.
-TEXTFELDER = ("titel", "text", "q", "warum", "frage", "untertitel",
-              "erklaerung", "zeichen")
+TEXTFELDER = ("titel", "text", "q", "warum", "herleitung", "frage",
+              "untertitel", "erklaerung", "zeichen")
 # Felder, die eine Liste von Texten tragen.
 LISTENFELDER = ("optionen", "options")
 
