@@ -1,37 +1,38 @@
-Segelschein 2.5 — der Kurs auf Englisch
+Segelschein 3.1 — die Formeln auf den Karteikarten sind hergeleitet
 
-**Alle 1694 Texte übersetzt.** Kapitel, Lektionen, alle 291 Aufgaben mit
-Antworten und Begründungen, die Einstufung und die Herleitungen. Der
-Sprachschalter erscheint auf der Startseite, weil `sprachen` jetzt
-`["de", "en"]` ist — vorher hat der Erzeuger Englisch bewusst nicht
-angeboten, solange es unvollständig war.
+Auf einigen Karten stand eine Zahl, die nach Formel aussieht: das Drei- bis
+Fünffache der Wassertiefe beim Ankern, der Faktor 1,41 beim Kreuzen, drei
+Sekunden je Kilometer beim Gewitter, 112,5 Grad Seitenlicht. Wer so eine Zahl
+nur auswendig kann, hat nichts in der Hand, sobald die Lage vom Lehrbuch
+abweicht — und das ist auf dem Wasser der Normalfall.
 
-**Zu den Fachwörtern:** Die Prüfung ist deutsch, und wer sie ablegt, muss
-die deutschen Wörter können. Deshalb steht in der englischen Fassung bei
-jedem Fachwort das deutsche in Klammern dahinter — „windward (Luv)",
-„tacking (Wende)", „clew (Schothorn)". Ein englischer Segler auf einem
-deutschen Binnensee hört „Luv" und nicht „windward"; wer den Kurs auf
-Englisch liest, soll die Prüfungsbegriffe trotzdem mitnehmen.
+**Fünfzehn Karten tragen jetzt in der Lösung ihre Herleitung:** woher die Zahl
+kommt, unter welcher Annahme sie gilt, und was passiert, wenn die Annahme nicht
+stimmt. Jedes Formelzeichen wird definiert, bevor es auftaucht, und jede Formel,
+die unterwegs neu eingeführt wird, wird selbst hergeleitet oder als das benannt,
+was sie ist — eine Festlegung, eine Messung oder eine Merkregel.
 
-Der Erzeuger bricht ab, wenn eine Übersetzung fehlt, und bietet Englisch
-erst an, wenn es vollständig ist. `data/fehlt.json` ist verschwunden.
+Ein Beispiel: Die Faustregel „drei- bis fünffache Wassertiefe" ist nichts
+anderes als `1 / sin α`. Der Anker gräbt sich nur ein, wenn der Zug flach
+ankommt, die Flunke braucht dafür 12° bis 20°, und `1 / sin 12° ≈ 4,8`,
+`1 / sin 20° ≈ 2,9`. Das sind die drei bis fünf.
 
-**Neu: die Formeln stehen zweimal da** — oben die Zeile, wie sie im
-Lehrtext vorkommt, darunter dieselbe Sache gesetzt, und dazu, woher sie
-kommt und wo sie aufhört zu gelten:
+**Wo eine Merkregel keine Formel ist, steht das da.** „Der Segelwinkel ist etwa
+halb so groß wie der Kurswinkel" ist eine Winkelhalbierende, die auf am Wind
+gerechnet ist; der scheinbare Wind und die raumen Kurse verschieben sie. Die
+Karte sagt das, statt eine Herleitung zu erfinden, die es nicht gibt.
 
-    L = T / sin α           wie viel Kette der Anker braucht
-    s = d / cos β           der Umweg beim Kreuzen
+**Zehn Karten bekommen eine Skizze dazu**, darunter eine neue für die
+Lichtsektoren: 90° bis querab plus zwei Kompassstriche zu 11,25° ergeben die
+112,5° des Seitenlichts, und das Hecklicht füllt mit `360 − 2 · 112,5 = 135`
+genau den Rest auf. Dieselben 135° sind die Definition des Überholers.
 
-Fünf Formeln in vier Lektionen: Ankerkette, Kreuzen, Winddruck,
-Seemeile und Knoten, Entfernung des Gewitters.
+Die Skizze steht **in der Lösung** und nicht über der Frage — davor wäre sie die
+Antwort.
 
-Gesetzt wird beim Bauen mit `tools/formeln.py` (matplotlib.mathtext in
-Computer Modern, also ohne TeX-Installation); das Gerät zeigt nur ein PNG,
-auf Sailfish vom Thema eingefärbt. Die Formeln stehen in
-`kursformeln.py`, nach Lektion geordnet.
+Alles zweisprachig, `sprachen` bleibt `["de", "en"]`.
 
-**Pakete**
+## Pakete
 
-* `segelschein_2.8_armel.deb` — Nokia N9 / N950, `dpkg -i`
-* `harbour-segelschein-1.5.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish
+* **N9 / N950:** `segelschein_3.1_armel.deb`
+* **Sailfish OS:** `harbour-segelschein-1.11.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
