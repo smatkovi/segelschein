@@ -36,10 +36,20 @@ ZEICHEN = {
 }
 
 
-def formel(zeile, tex, untertitel, erklaerung, zeichen=""):
+# Welche Skizze zu welcher Formel gehoert; gezeichnet von tools/skizzen.py.
+SKIZZEN = {
+ "Wie viel Kette der Anker braucht": "skizze-anker",
+ "Der Umweg beim Kreuzen": "skizze-kreuzen",
+ "Winddruck wächst mit dem Quadrat": "skizze-staudruck",
+ "Wie weit das Gewitter weg ist": "skizze-donner",
+}
+
+
+def formel(zeile, tex, untertitel, erklaerung, zeichen="", skizze=""):
     return {"code": zeile, "tex": tex, "untertitel": untertitel,
             "erklaerung": erklaerung,
-            "zeichen": zeichen or ZEICHEN.get(untertitel, "")}
+            "zeichen": zeichen or ZEICHEN.get(untertitel, ""),
+            "skizze": skizze or SKIZZEN.get(untertitel, "")}
 
 
 KURSFORMELN = {
