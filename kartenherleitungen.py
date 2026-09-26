@@ -222,7 +222,7 @@ DONNER = (
  "— die Regel schätzt das Gewitter also eher etwas näher, als es ist, "
  "und das ist die richtige Richtung.\n\n"
  "Die Schallgeschwindigkeit hängt an der Temperatur "
- "(`c ≈ 331 + 0,6 · ϑ` m/s mit `ϑ` in °C), aber zwischen 0 °C "
+ "(`c ≈ 331 + 0,6 · θ` m/s mit `θ` in °C), aber zwischen 0 °C "
  "und 30 °C ändert sich das nur um ein paar Prozent — weniger, als man "
  "beim Zählen ohnehin danebenliegt. Wichtiger: gezählt wird bis zum "
  "**ersten** Donner, nicht bis zum lautesten."
